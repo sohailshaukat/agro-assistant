@@ -1,10 +1,36 @@
 {% extends 'basic.html' %}
 {% block content %}
 
+<div class='container'>
 <div class="jumbotron">
   <h1>Welcome to the Soil-Genie!</h1>
   <p class='lead'>Here to help with choices of crops according to your soil conditions and vice-versa!</p>
+</div>
+<form method="POST">
+<div class="row" style="margin-bottom:20px;">
+  <div class="column" style="width: 50%; background-color: rgba(217, 217, 217,0.5);">
+    <h2 class='display-4' style="text-align: center;">Soil for Crop</h2>
+    {{ form_soil.hidden_tag() }}
+    {{ form_soil.soil_type.label(class_="h4 lead")}}
+    <br>
+    {{ form_soil.soil_type(class_="btn-lg btn-group btn-secondary",style='width:80%;') }}
+    {{ form_soil.submit(class_="btn btn-light") }}
+  </div>
+  <div class="column" style="width: 50%; background-color: rgba(217, 217, 217,0.5);">
+    <h2 class='display-4' style="text-align: center;">Crop for Soil</h2>
+    {{ form_crop.hidden_tag() }}
+    {{ form_crop.crop_option.label(class_="h4 lead")}}
+    <br>
+    {{ form_crop.crop_option(class_="btn-lg btn-group btn-secondary",style='width:80%;') }}
+    {{ form_crop.submit(class_="btn btn-light") }}
+  </div>
 
 </div>
+
+</form>
+
+</div>
+
+
 
 {% endblock %}

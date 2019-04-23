@@ -1,4 +1,8 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, session, redirect, url_for
+from flask_wtf import FlaskForm
+from wtforms import (StringField, BooleanField, DateTimeField, RadioField, SelectField,
+                    TextField, TextAreaField, SubmitField)
+from wtforms.validators import DataRequired
 from soils import soils
 
 app = Flask(__name__)
@@ -6,7 +10,23 @@ app = Flask(__name__)
 
 app.config['SECRET_KEY']='mykey'
 
-@app.route('/')
+class GenieSoilForm(FlaskForm):
+
+    soil_type = SelectField(u'Select a Soil type:',choices = [('soil_type_alluvial','Alluvial'),('soil_type_red','Red'),
+                                                            ('soil_type_black','Black'),('soil_type_mountain','Mountain'),
+                                                            ('soil_type_laterite','Laterite'),('soil_type_desert','Desert')])
+    submit = SubmitField('Submit')
+
+class GenieCropForm(FlaskForm):
+
+    crop_option = SelectField(u'Select a Crop kind:', choices =[('crop_option_rice','Rice'),('crop_option_wheat','Wheat'),
+                                                                ('crop_option_sugarcane','Sugarcane'),('crop_option_groundnut','Groundnut'),
+                                                                ('crop_option_apple','Apple'),('crop_option_strawberry','Strawberry'),
+                                                                ('crop_option_maize','Maize'),('crop_option_grapes','Grapes'),('crop_option_coffee','Coffee'),
+                                                                ('crop_option_pulses','Pulses')])
+    submit = SubmitField('Submit')
+
+@app.route('/',methods=['GET','POST'])
 def index():
     return render_template("home.html")
 
@@ -81,11 +101,23 @@ def desert_soil():
     name = data['name']
     return render_template('desert-soil.html', crops = crops, messages = messages, message_length = message_length, name = name)
 
-@app.route('/soil-genie')
+@app.route('/soil-genie',methods=['GET','POST'])
 def soil_genie():
+    form_soil = GenieSoilForm()
+    form_crop = GenieCropForm()
+    if form_soil.validate_on_submit():
+        session['soil_type'] = form_soil.soil_type.data
+        return redirect(url_for('soil_genie_result'))
+    elif form_crop.validate_on_submit():
+        session['crop_option'] = form_crop.crop_option.data
+        return redirect(url_for('soil_genie_result'))
 
 
-    return render_template('soil-genie.html')
+    return render_template('soil-genie.html',form_soil = form_soil, form_crop = form_crop)
+
+@app.route('/soil-genie/advice')
+def soil_genie_result():
+    return render_template('soil-genie-advice.html')
 
 if __name__ == '__main__':
     app.run(debug = True)
