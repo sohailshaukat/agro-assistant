@@ -1,0 +1,101 @@
+<style>
+
+  .column {
+    float: left;
+    width: 33.33%;
+    margin: 20px;
+    margin-left: 80px;
+    margin-right: 80px;
+    border-left: 40px;
+    border-right: 40px;
+  }
+
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+
+  }
+
+
+</style>
+{% extends "basic.html" %}
+
+{% block content %}
+
+<div class="jumbotron">
+  <h1>Soil Guru!</h1>
+  <p class='lead'>Here to talk about various types of soils found in India</p>
+
+</div>
+
+<div class="container">
+
+
+<div class="row">
+
+<div class="card column" style="width: 18rem;">
+  <img src="{{ url_for('static', filename='alluvial-soil-thumbnail.jpg') }}" class="card-img-top" alt="Alluvial Soil">
+  <div class="card-body">
+    <h5 class="card-title">Alluvial soil</h5>
+    <p class="card-text">Alluvial soil deposited from the rivers, winds, glaciers, and sea waves are called the alluvium and soil after this made up the alluvial soil.</p>
+    <a href="{{ url_for('alluvial_soil') }}" class="btn btn-dark">Wanna know more?</a>
+  </div>
+  </div>
+
+<div class="card column" style="width: 18rem;">
+    <img src="{{ url_for('static', filename='red-soil-thumbnail.jpg') }}" class="card-img-top" alt="Red Soil">
+    <div class="card-body">
+      <h5 class="card-title">Red Soil</h5>
+      <p class="card-text">Red soils develop under very low rainfall condition on granite and geneses rocks. The dissemination of red oxides of iron gives the characteristic red color of the ground.</p>
+      <a href="{{ url_for('red_soil') }}" class="btn btn-dark">Wanna know more?</a>
+    </div>
+    </div>
+</div>
+
+<div class="row">
+
+<div class="card column" style="width: 18rem;">
+      <img src="{{ url_for('static', filename='black-soil-thumbnail.jpg') }}" class="card-img-top" alt="Black Soil">
+      <div class="card-body">
+        <h5 class="card-title">Black Soil</h5>
+        <p class="card-text">Black soils regular is clayey, becomes very sticky when wet. Its particular merit lies in its water holding capacity. </p>
+        <a href="{{ url_for('black_soil') }}" class="btn btn-dark">Wanna know more?</a>
+      </div>
+
+</div>
+
+<div class="card column" style="width: 18rem;">
+      <img src="{{ url_for('static', filename='mountain-soil-thumbnail.jpg') }}" class="card-img-top" alt="Mountain Soil">
+      <div class="card-body">
+        <h5 class="card-title">Mountain soil</h5>
+        <p class="card-text">Mountain soil is formed mainly due to the deposition of organic matter provided by the forests. </p>
+        <a href="{{ url_for('mountain_soil') }}" class="btn btn-dark">Wanna know more?</a>
+      </div>
+      </div>
+</div>
+
+<div class="row">
+<div class="card column" style="width: 18rem;">
+      <img src="{{ url_for('static', filename='laterite-soil-thumbnail.jpg') }}" class="card-img-top" alt="Laterite Soil">
+      <div class="card-body">
+        <h5 class="card-title">Laterite soil</h5>
+        <p class="card-text">Laterite soil is a kind of clayey rock or soil formed under high temperature and high rainfall. By various modifications, laterite converted into red colored lateritic soils charged with iron nodules.</p>
+        <a href="{{ url_for('mountain_soil') }}" class="btn btn-dark">Wanna know more?</a>
+      </div>
+
+</div>
+
+<div class="card column" style="width: 18rem;">
+      <img src="{{ url_for('static', filename='desert-soil-thumbnail.jpg') }}" class="card-img-top" alt="Desert Soil">
+      <div class="card-body">
+        <h5 class="card-title">Desert soil</h5>
+        <p class="card-text">The sand in the desert areas is partly of local origin and partly being blown in from the Indus Valley. It includes even the wind-blown loess.</p>
+        <a href="{{ url_for('desert_soil') }}" class="btn btn-dark">Wanna know more?</a>
+      </div>
+
+</div>
+
+</div>
+{% endblock %}

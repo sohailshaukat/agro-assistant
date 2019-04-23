@@ -1,0 +1,28 @@
+{% extends 'basic.html' %}
+{% block content %}
+
+
+{% if cond_lower and cond_upper and cond_number %}
+    <h3>USERNAME {{username}} accepted!</h3>
+    <p> with all {{cond_satisfied}} conditions satisfied!</p>
+{% else %}
+    <h3>Only {{cond_satisfied}} conditions satisfied</h3>
+{% endif %}
+
+<ul>
+{% if not cond_lower %}
+    <li>No Lowercase Letters found</li>
+{% endif %}
+{% if not cond_upper %}
+    <li>No Uppercase Letters found </li>
+{% endif %}
+{% if not cond_number %}
+    <li>Please add a number to the end</li>
+{% endif %}
+</ul>
+
+
+
+
+
+{% endblock %}
