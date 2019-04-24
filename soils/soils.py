@@ -56,3 +56,36 @@ def desert_soil_data():
     desert = Soil(crops_grown=['Wheat', 'Millets', 'Barley', 'Maize', 'Pulses', 'Cotton'], description=desc)
     data = {'crop': desert.crops_grown, 'description': desc, 'name':'Desert Soil'}
     return data
+
+
+
+
+
+def soil_to_crop(soil_type):
+    if soil_type == 'soil_type_alluvial':
+        data = alluvial_soil_data()
+        crop_list = data['crop']
+        return {'soil_type':'Alluvial Soil','crop_list':crop_list}
+    elif soil_type =='soil_type_red':
+        data = red_soil_data()
+        crop_list = data['crop']
+        return {'soil_type':'Red Soil','crop_list':crop_list}
+    elif soil_type =='soil_type_black':
+        data = black_soil_data()
+        crop_list = data['crop']
+        return {'soil_type':'Black Soil','crop_list':crop_list}
+    elif soil_type =='soil_type_mountain':
+        data = mountain_soil_data()
+        crop_list = data['crop']
+        return {'soil_type':'Mountain Soil','crop_list':crop_list}
+    elif soil_type =='soil_type_laterite':
+        data = laterite_soil_data()
+        crop_list = data['crop']
+        return {'soil_type':'Laterite Soil','crop_list':crop_list}
+    elif soil_type =='soil_type_desert':
+        data = desert_soil_data()
+        crop_list = data['crop']
+        return {'soil_type':'Desert Soil','crop_list':crop_list}
+
+def crop_to_soil():
+    return

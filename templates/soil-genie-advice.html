@@ -2,8 +2,19 @@
 {% block content %}
 
 <div class="jumbotron">
-  below will be results
-</div>
+  <h1>Thanks for the Info</h1>
 
+    <h1 class='display-4'>Soil: {{ soil_type_result }}</h1>
+    <ul class="list-group">
+      <p class="lead">Cultivation to Opt for:</p>
+      {% for crop in crop_list %}
+
+        <li class="list-group-item">{{ crop }}</li>
+      {% endfor %}
+    </ul>
+
+
+
+</div>
 
 {% endblock %}

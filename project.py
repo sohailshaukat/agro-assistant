@@ -122,15 +122,19 @@ def soil_genie():
     form_soil = GenieSoilForm()
     form_crop = GenieCropForm()
     form_fertilizer = GenieFertilizerForm()
+    session['formtype'] = False
     if form_soil.validate_on_submit():
         session['soil_type'] = form_soil.soil_type.data
+        session['formtype'] = 'soil_genie'
         return redirect(url_for('soil_genie_result'))
     elif form_crop.validate_on_submit():
         session['crop_option'] = form_crop.crop_option.data
+        session['formtype'] = 'crop_genie'
         return redirect(url_for('soil_genie_result'))
     elif form_fertilizer.validate_on_submit():
         session['soil_type'] = form_fertilizer.soil_type.data
         session['crop_option'] = form_fertilizer.crop_option.data
+        session['formtype'] = 'fertilizer_genie'
         return redirect(url_for('soil_genie_result'))
 
 
@@ -139,7 +143,24 @@ def soil_genie():
 
 @app.route('/soil-genie/advice')
 def soil_genie_result():
-    return render_template('soil-genie-advice.html')
+    if not session['formtype']:
+        pass
+    elif session['formtype'] == 'soil_genie':
+        data_publish = soils.soil_to_crop(session['soil_type'])
+        soil_type_result = data_publish['soil_type']
+        crop_list = data_publish['crop_list']
+        pass
+    elif session['formtype'] == 'crop_genie':
+        data_publish = soils.crop_to_soil(session['crop_option'])
+        pass
+    elif session['formtype'] == 'fertilizer_genie':
+        data_publish_fertilizer = soils.soil_crop_fertilizer(session['soil_type'], session['crop_option'])
+        pass
+    return render_template('soil-genie-advice.html', soil_type_result= soil_type_result, crop_list= crop_list) 
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
 
 if __name__ == '__main__':
     app.run(debug = True)
