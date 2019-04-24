@@ -58,11 +58,11 @@ def sensor_data():
 def weather_prediction():
     return render_template('weather_prediction.html')
 
-@app.route('/soil-guru')
+@app.route('/agro-guru')
 def soil_guru():
     return render_template('soil_guru.html')
 
-@app.route('/soil-guru/alluvial-soil')
+@app.route('/agro-guru/alluvial-soil')
 def alluvial_soil():
     data = soils.alluvial_soil_data()
     crops = data['crop']
@@ -71,7 +71,7 @@ def alluvial_soil():
     name = data['name']
 
     return render_template('alluvial-soil.html', crops = crops, messages = messages, message_length = message_length, name = name)
-@app.route('/soil-guru/red-soil')
+@app.route('/agro-guru/red-soil')
 def red_soil():
     data = soils.red_soil_data()
     crops = data['crop']
@@ -80,7 +80,7 @@ def red_soil():
     name = data['name']
     return render_template('red-soil.html', crops = crops, messages = messages, message_length = message_length, name = name)
 
-@app.route('/soil-guru/black-soil')
+@app.route('/agro-guru/black-soil')
 def black_soil():
     data = soils.black_soil_data()
     crops = data['crop']
@@ -90,7 +90,7 @@ def black_soil():
     return render_template('black-soil.html', crops = crops, messages = messages, message_length = message_length, name = name)
 
 
-@app.route('/soil-guru/mountain-soil')
+@app.route('/agro-guru/mountain-soil')
 def mountain_soil():
     data = soils.mountain_soil_data()
     crops = data['crop']
@@ -99,7 +99,7 @@ def mountain_soil():
     name = data['name']
     return render_template('mountain-soil.html', crops = crops, messages = messages, message_length = message_length, name = name)
 
-@app.route('/soil-guru/laterite-soil')
+@app.route('/agro-guru/laterite-soil')
 def laterite_soil():
     data = soils.laterite_soil_data()
     crops = data['crop']
@@ -108,7 +108,7 @@ def laterite_soil():
     name = data['name']
     return render_template('laterite-soil.html', crops = crops, messages = messages, message_length = message_length, name = name)
 
-@app.route('/soil-guru/desert-soil')
+@app.route('/agro-guru/desert-soil')
 def desert_soil():
     data = soils.desert_soil_data()
     crops = data['crop']
@@ -117,7 +117,7 @@ def desert_soil():
     name = data['name']
     return render_template('desert-soil.html', crops = crops, messages = messages, message_length = message_length, name = name)
 
-@app.route('/soil-genie',methods=['GET','POST'])
+@app.route('/agro-genie',methods=['GET','POST'])
 def soil_genie():
     form_soil = GenieSoilForm()
     form_crop = GenieCropForm()
@@ -141,7 +141,7 @@ def soil_genie():
 
     return render_template('soil-genie.html',form_soil = form_soil, form_crop = form_crop, form_fertilizer = form_fertilizer)
 
-@app.route('/soil-genie/advice')
+@app.route('/agro-genie/advice')
 def soil_genie_result():
     if not session['formtype']:
         pass
@@ -156,7 +156,7 @@ def soil_genie_result():
     elif session['formtype'] == 'fertilizer_genie':
         data_publish_fertilizer = soils.soil_crop_fertilizer(session['soil_type'], session['crop_option'])
         pass
-    return render_template('soil-genie-advice.html', soil_type_result= soil_type_result, crop_list= crop_list) 
+    return render_template('soil-genie-advice.html', soil_type_result= soil_type_result, crop_list= crop_list)
 
 @app.errorhandler(404)
 def page_not_found(e):
