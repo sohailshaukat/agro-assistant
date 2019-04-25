@@ -37,7 +37,7 @@ def mountain_soil_data():
     s3 = 'Apart from the Himalayan region, this soil also found in the Western and the Eastern Ghats and some parts of the Peninsular India'
     desc = [s1,s2]
 
-    mountain = Soil(crops_grown=['Wheat', 'Maize', 'Barley', 'Apple', 'Pear', 'Peach', 'Plum', 'Grape', 'Strawberry', 'Tea', 'Coffee'], description=desc)
+    mountain = Soil(crops_grown=['Wheat', 'Maize', 'Barley', 'Apple', 'Pear', 'Peach', 'Plum', 'Grapes', 'Strawberry', 'Tea', 'Coffee'], description=desc)
     data = {'crop': mountain.crops_grown, 'description': desc, 'name':'Mountain Soil'}
     return data
 
@@ -87,5 +87,51 @@ def soil_to_crop(soil_type):
         crop_list = data['crop']
         return {'soil_type':'Desert Soil','crop_list':crop_list}
 
-def crop_to_soil():
-    return
+def crop_name_converter(crop_option_list):
+    if crop_option_list == 'crop_option_rice':
+        return 'Rice'
+    if crop_option_list == 'crop_option_wheat':
+        return 'Wheat'
+    if crop_option_list == 'crop_option_sugarcane':
+        return 'Sugarcane'
+    if crop_option_list == 'crop_option_groundnut':
+        return 'Groundnut'
+    if crop_option_list == 'crop_option_apple':
+        return 'Apple'
+    if crop_option_list == 'crop_option_strawberry':
+        return 'Strawberry'
+    if crop_option_list == 'crop_option_maize':
+        return 'Maize'
+    if crop_option_list == 'crop_option_grapes':
+        return 'Grapes'
+    if crop_option_list == 'crop_option_coffee':
+        return 'Coffee'
+
+def crop_to_soil(crop_option_list):
+
+    data_alluvial = alluvial_soil_data()
+    data_black = black_soil_data()
+    data_red = red_soil_data()
+    data_mountain = mountain_soil_data()
+    data_laterite = laterite_soil_data()
+    data_desert = desert_soil_data()
+    soil_compatible =[]
+    crop_option = crop_name_converter(crop_option_list)
+
+    if crop_option in data_alluvial['crop']:
+        soil_compatible.append('Alluvial')
+    elif crop_option in data_red['crop']:
+        soil_compatible.append('Red')
+    elif crop_option in data_black['crop']:
+        soil_compatible.append('Black')
+    elif crop_option in data_mountain['crop']:
+        soil_compatible.append('Mountain')
+    elif crop_option in data_laterite['crop']:
+        soil_compatible.append('Laterite')
+    elif crop_option in data_desert['crop']:
+        soil_compatible.append('Desert')
+    crop_soil_compatibility = {'crop_option_result':crop_option, 'soil_list':soil_compatible}
+    return crop_soil_compatibility
+
+
+print(crop_to_soil('crop_option_sugarcane'))

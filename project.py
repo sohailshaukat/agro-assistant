@@ -35,8 +35,8 @@ class GenieFertilizerForm(FlaskForm):
     crop_option = SelectField(u'Select a Crop kind:', choices =[('crop_option_rice','Rice'),('crop_option_wheat','Wheat'),
                                                                 ('crop_option_sugarcane','Sugarcane'),('crop_option_groundnut','Groundnut'),
                                                                 ('crop_option_apple','Apple'),('crop_option_strawberry','Strawberry'),
-                                                                ('crop_option_maize','Maize'),('crop_option_grapes','Grapes'),('crop_option_coffee','Coffee'),
-                                                                ('crop_option_pulses','Pulses')])
+                                                                ('crop_option_maize','Maize'),('crop_option_grapes','Grapes'),('crop_option_coffee','Coffee')
+                                                                ])
 
     submit = SubmitField('Submit')
 
@@ -143,6 +143,11 @@ def soil_genie():
 
 @app.route('/agro-genie/advice')
 def soil_genie_result():
+    soil_type_result = False
+    crop_list = False
+    soil_list = False
+    crop_option_result = False
+
     if not session['formtype']:
         pass
     elif session['formtype'] == 'soil_genie':
@@ -152,11 +157,13 @@ def soil_genie_result():
         pass
     elif session['formtype'] == 'crop_genie':
         data_publish = soils.crop_to_soil(session['crop_option'])
+        soil_list = data_publish['soil_list']
+        crop_option_result = data_publish['crop_option_result']
         pass
     elif session['formtype'] == 'fertilizer_genie':
         data_publish_fertilizer = soils.soil_crop_fertilizer(session['soil_type'], session['crop_option'])
         pass
-    return render_template('soil-genie-advice.html', soil_type_result= soil_type_result, crop_list= crop_list)
+    return render_template('soil-genie-advice.html',soil_type_result= soil_type_result, crop_list= crop_list, crop_option_result = crop_option_result , soil_list =soil_list  )
 
 @app.errorhandler(404)
 def page_not_found(e):
