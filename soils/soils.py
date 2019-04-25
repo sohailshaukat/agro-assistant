@@ -120,18 +120,15 @@ def crop_to_soil(crop_option_list):
 
     if crop_option in data_alluvial['crop']:
         soil_compatible.append('Alluvial')
-    elif crop_option in data_red['crop']:
+    if crop_option in data_red['crop']:
         soil_compatible.append('Red')
-    elif crop_option in data_black['crop']:
+    if crop_option in data_black['crop']:
         soil_compatible.append('Black')
-    elif crop_option in data_mountain['crop']:
+    if crop_option in data_mountain['crop']:
         soil_compatible.append('Mountain')
-    elif crop_option in data_laterite['crop']:
+    if crop_option in data_laterite['crop']:
         soil_compatible.append('Laterite')
-    elif crop_option in data_desert['crop']:
+    if crop_option in data_desert['crop']:
         soil_compatible.append('Desert')
     crop_soil_compatibility = {'crop_option_result':crop_option, 'soil_list':soil_compatible}
     return crop_soil_compatibility
-
-
-print(crop_to_soil('crop_option_sugarcane'))
