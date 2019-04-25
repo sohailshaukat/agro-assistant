@@ -4,16 +4,16 @@
 <div class="jumbotron">
   <h1 >Here are the results obtained for..</h1>
 
-{% if session['formtype'] == 'soil_genie' %}
+{% if form_type == 'soil_genie' %}
   <h1 class='display-4'>Soil: {{ soil_type_result }}</h1>
   <ul class="list-group">
     <p class="lead">Cultivation to Opt for:</p>
     {% for crop in crop_list %}
 
-      <li class="list-group-item">{{ crop }}</li>
+      <li class="list-group-item">{{ form_type }}</li>
     {% endfor %}
   </ul>
-{% elif session['formtype'] == 'crop_genie' %}
+{% elif form_type == 'crop_genie' %}
 <h1 class='display-4'>Crop: {{ crop_option_result }}</h1>
 <ul class="list-group">
   <p class="lead">Soils to Opt for:</p>
@@ -22,10 +22,10 @@
     <li class="list-group-item">{{ soil }}</li>
   {% endfor %}
 </ul>
-{% elif session['formtype'] == 'fertilizer_genie'%}
+{% elif form_type == 'fertilizer_genie'%}
     ferti
 {% else %}
-    ehh
+<h1>{{form_type}}</h1>
 {% endif %}
 
 

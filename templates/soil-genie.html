@@ -16,17 +16,21 @@
     {{ form_soil.soil_type(class_="btn-lg btn-group btn-secondary",style='width:80%;') }}
     {{ form_soil.submit(class_="btn btn-light") }}
   </div>
+  </form>
+
   <div class="column" style="width: 50%; background-color: rgba(217, 217, 217,0.7);border-radius:5px; padding:5px;">
     <h2 class='display-4' style="text-align: center;">Crop for Soil</h2>
+    <form method="POST">
     {{ form_crop.hidden_tag() }}
     {{ form_crop.crop_option.label(class_="h4 lead")}}
     <br>
     {{ form_crop.crop_option(class_="btn-lg btn-group btn-secondary",style='width:80%;') }}
     {{ form_crop.submit(class_="btn btn-light") }}
+    </form>
   </div>
 
 </div>
-
+<form method="POST">
 <div style="margin-bottom: 40px;background-color: rgba(217, 217, 217,0.7); border-radius:5px; padding:5px;">
   <h2 class='display-4' style="text-align: center;">Fertilizers for Crops and Soil types:</h2>
   {{ form_fertilizer.hidden_tag() }}
@@ -43,7 +47,7 @@
 
 
 </div>
-
+</form>
 
 </form>
 

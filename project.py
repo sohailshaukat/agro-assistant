@@ -12,14 +12,14 @@ app.config['SECRET_KEY']='mykey'
 
 class GenieSoilForm(FlaskForm):
 
-    soil_type = SelectField(u'Select a Soil type:',choices = [('soil_type_alluvial','Alluvial'),('soil_type_red','Red'),
+    soil_type = SelectField(u'Select a Soil type:',choices = [('soil_type_null','Null'),('soil_type_alluvial','Alluvial'),('soil_type_red','Red'),
                                                             ('soil_type_black','Black'),('soil_type_mountain','Mountain'),
                                                             ('soil_type_laterite','Laterite'),('soil_type_desert','Desert')])
     submit = SubmitField('Submit')
 
 class GenieCropForm(FlaskForm):
 
-    crop_option = SelectField(u'Select a Crop kind:', choices =[('crop_option_rice','Rice'),('crop_option_wheat','Wheat'),
+    crop_option = SelectField(u'Select a Crop kind:', choices =[('crop_option_null','Null'),('crop_option_rice','Rice'),('crop_option_wheat','Wheat'),
                                                                 ('crop_option_sugarcane','Sugarcane'),('crop_option_groundnut','Groundnut'),
                                                                 ('crop_option_apple','Apple'),('crop_option_strawberry','Strawberry'),
                                                                 ('crop_option_maize','Maize'),('crop_option_grapes','Grapes'),('crop_option_coffee','Coffee'),
@@ -28,11 +28,11 @@ class GenieCropForm(FlaskForm):
 
 class GenieFertilizerForm(FlaskForm):
 
-    soil_type = SelectField(u'Select a Soil type:',choices = [('soil_type_alluvial','Alluvial'),('soil_type_red','Red'),
+    soil_type = SelectField(u'Select a Soil type:',choices = [('soil_type_null','Null'),('soil_type_alluvial','Alluvial'),('soil_type_red','Red'),
                                                             ('soil_type_black','Black'),('soil_type_mountain','Mountain'),
                                                             ('soil_type_laterite','Laterite'),('soil_type_desert','Desert')])
 
-    crop_option = SelectField(u'Select a Crop kind:', choices =[('crop_option_rice','Rice'),('crop_option_wheat','Wheat'),
+    crop_option = SelectField(u'Select a Crop kind:', choices =[('crop_option_null','Null'),('crop_option_rice','Rice'),('crop_option_wheat','Wheat'),
                                                                 ('crop_option_sugarcane','Sugarcane'),('crop_option_groundnut','Groundnut'),
                                                                 ('crop_option_apple','Apple'),('crop_option_strawberry','Strawberry'),
                                                                 ('crop_option_maize','Maize'),('crop_option_grapes','Grapes'),('crop_option_coffee','Coffee')
@@ -147,6 +147,7 @@ def soil_genie_result():
     crop_list = False
     soil_list = False
     crop_option_result = False
+    form_type = 'NoForm'
 
     if not session['formtype']:
         pass
@@ -154,16 +155,19 @@ def soil_genie_result():
         data_publish = soils.soil_to_crop(session['soil_type'])
         soil_type_result = data_publish['soil_type']
         crop_list = data_publish['crop_list']
+        form_type = 'soil_genie'
         pass
     elif session['formtype'] == 'crop_genie':
         data_publish = soils.crop_to_soil(session['crop_option'])
         soil_list = data_publish['soil_list']
         crop_option_result = data_publish['crop_option_result']
+        form_type = 'crop_genie'
         pass
     elif session['formtype'] == 'fertilizer_genie':
         data_publish_fertilizer = soils.soil_crop_fertilizer(session['soil_type'], session['crop_option'])
+        form_type = 'fertilizer_genie'
         pass
-    return render_template('soil-genie-advice.html',soil_type_result= soil_type_result, crop_list= crop_list, crop_option_result = crop_option_result , soil_list =soil_list  )
+    return render_template('soil-genie-advice.html',form_type = form_type,soil_type_result= soil_type_result, crop_list= crop_list, crop_option_result = crop_option_result , soil_list =soil_list  )
 
 @app.errorhandler(404)
 def page_not_found(e):
