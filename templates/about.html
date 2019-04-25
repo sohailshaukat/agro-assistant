@@ -1,0 +1,27 @@
+{% extends 'basic.html' %}
+{% block content %}
+
+<div class="jumbotron" >
+<h1 class='display-3'> About and Download</h1>
+</div>
+
+<div class="row">
+
+    <div class="col-lg-3 col-xs-4 card " style="width: 18rem; padding: 10px; border-radius: 5px;">
+      <img src="{{ url_for('static', filename='Agro-Assistant-App-Code.png')}}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Android App</h5>
+        <p class="card-text">This will redirect you to the App click download and then install!</p>
+        <a href="http://l.ead.me/agro-assistant" class="btn btn-success">Download</a>
+      </div>
+    </div>
+
+
+  <div class="col-lg-8 col-xs-6" style="background-color: rgba(217, 217, 217,0.7);border-radius:5px; padding:5px; margin-left: 20px; ">
+  <h3 class="display-4">Download:</h3>
+  <p class='lead'>You can the downlad the android app by scanning the QR Code or by clicking the button below. </p>
+  </div>
+</div>
+
+
+{% endblock %}

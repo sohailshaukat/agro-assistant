@@ -28,51 +28,44 @@
 
   </head>
   <body class="bg">
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand " href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='agro-assistant-icon.jpg')}}" width="30" height="30" class="d-inline-block align-top" alt="">Agro-Assistant</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('sensor_data') }}">Sensor Data</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('weather_prediction') }}">Weather Prediction</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('soil_guru') }}">Agro-Guru</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('soil_genie') }}">Agro-Genie</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('about') }}">About</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+          {% for mes in get_flashed_messages() %}
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <button type="button" class="fade close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            {{ mes }}
+      </div>
+          {% endfor %}
+          <div class='container' style="opacity: 0.9; margin-top:10px;">
+          {% block content %}
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand " href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='agro-assistant-icon.jpg')}}" width="30" height="30" class="d-inline-block align-top" alt="">Agro-Assistant</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('sensor_data') }}">Sensor Data</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('weather_prediction') }}">Weather Prediction</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('soil_guru') }}">Agro-Guru</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('soil_genie') }}">Agro-Genie</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('thankyou') }}">About</a>
-      </li>
-    </ul>
-  </div>
-</nav>
-
-
-    {% for mes in get_flashed_messages() %}
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-      <button type="button" class="fade close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-      {{ mes }}
-</div>
-    {% endfor %}
-
-
-    <div class='container' style="opacity: 0.9; margin-top:10px;">
-    {% block content %}
-
-    {% endblock %}
-  </div>
-
-
+          {% endblock %}
+        </div>
 
   </body>
 

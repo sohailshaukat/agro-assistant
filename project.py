@@ -46,9 +46,9 @@ class GenieFertilizerForm(FlaskForm):
 def index():
     return render_template("home.html")
 
-@app.route('/thankyou')
-def thankyou():
-    return render_template("thankyou.html")
+@app.route('/about-and-download')
+def about():
+    return render_template("about.html")
 
 @app.route('/sensor_data')
 def sensor_data():
