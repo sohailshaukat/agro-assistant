@@ -1,0 +1,92 @@
+{% extends "basic.html" %}
+{% block content %}
+
+<div class="jumbotron">
+  <h1 class = 'display-4'>Rainfall Predictor</h1>
+  <p class='lead'>Below given values are obtained by two different Machine Learning Models </p>
+  <ul>
+    <li><p class='lead'></p>Linear Regression Model</li>
+    <li><p class='lead'></p>Polynomial Regression Model</li>
+  </ul>
+  <p class='h3'> Here are results obtained by Linear Regression Model for months  in the year 2019:</p>
+
+  <table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Month</th>
+      <th scope="col">Rainfall in mm</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>June</td>
+      <td>{{ june_pred_linear }}</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>July</td>
+      <td>{{ july_pred_linear }}</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>August</td>
+      <td>{{ august_pred_linear }}</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>September</td>
+      <td>{{ september_pred_linear }}</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>October</td>
+      <td>{{ october_pred_linear }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<p class='h3'> Here are results obtained by Polynomial Regression Model for months in the year 2019:</p>
+<table class="table table-dark">
+<thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Month</th>
+    <th scope="col">Rainfall in mm</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <th scope="row">1</th>
+    <td>June</td>
+    <td>{{ june_pred_polynomial }}</td>
+  </tr>
+  <tr>
+    <th scope="row">2</th>
+    <td>July</td>
+    <td>{{ july_pred_polynomial }}</td>
+  </tr>
+  <tr>
+    <th scope="row">3</th>
+    <td>August</td>
+    <td>{{ august_pred_polynomial }}</td>
+  </tr>
+  <tr>
+    <th scope="row">3</th>
+    <td>September</td>
+    <td>{{ september_pred_polynomial }}</td>
+  </tr>
+  <tr>
+    <th scope="row">3</th>
+    <td>October</td>
+    <td>{{ october_pred_polynomial }}</td>
+  </tr>
+</tbody>
+</table>
+
+
+</div>
+
+
+{% endblock %}

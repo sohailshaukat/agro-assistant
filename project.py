@@ -4,6 +4,7 @@ from wtforms import (StringField, BooleanField, DateTimeField, RadioField, Selec
                     TextField, TextAreaField, SubmitField)
 from wtforms.validators import DataRequired
 from soils import soils,advice
+from rainfall_prediction import rainfall_regressor
 
 app = Flask(__name__)
 
@@ -52,9 +53,23 @@ def about():
 def sensor_data():
     return render_template('sensor_data.html')
 
-@app.route('/weather-prediction')
-def weather_prediction():
-    return render_template('weather_prediction.html')
+@app.route('/rainfall-prediction')
+def rainfall_prediction():
+    rainfall_data_tuple = rainfall_regressor.rain_predictor()
+    june_pred_linear = rainfall_data_tuple[0]['June']
+    july_pred_linear = rainfall_data_tuple[0]['July']
+    august_pred_linear = rainfall_data_tuple[0]['August']
+    september_pred_linear = rainfall_data_tuple[0]['September']
+    october_pred_linear = rainfall_data_tuple[0]['October']
+
+    june_pred_polynomial = rainfall_data_tuple[1]['June']
+    july_pred_polynomial = rainfall_data_tuple[1]['July']
+    august_pred_polynomial = rainfall_data_tuple[1]['August']
+    september_pred_polynomial = rainfall_data_tuple[1]['September']
+    october_pred_polynomial = rainfall_data_tuple[1]['October']
+
+    return render_template('rainfall_prediction.html', august_pred_linear = august_pred_linear , september_pred_linear = september_pred_linear, october_pred_linear = october_pred_linear , june_pred_linear = june_pred_linear, july_pred_linear = july_pred_linear,
+                            june_pred_polynomial = june_pred_polynomial, july_pred_polynomial = july_pred_polynomial, august_pred_polynomial = august_pred_polynomial, september_pred_polynomial = september_pred_polynomial, october_pred_polynomial = october_pred_polynomial)
 
 @app.route('/agro-guru')
 def soil_guru():
