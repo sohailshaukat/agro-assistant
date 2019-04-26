@@ -2,7 +2,7 @@
 {% block content %}
 
 <div class="jumbotron">
-  <h1 >Here are the results obtained for..</h1>
+  
 
 {% if form_type == 'soil_genie' %}
   <h1 class='display-4'>Soil: {{ soil_type_result }}</h1>
@@ -23,7 +23,23 @@
   {% endfor %}
 </ul>
 {% elif form_type == 'fertilizer_genie'%}
-    ferti
+  <h1 class='display-4'>Crop: {{ crop_option_result }}</h1>
+  <h1 class='display-4'>Soil: {{ soil_type_result }}</h1>
+
+    <blockquote class="blockquote" ><p><em>{{ compatibility_string }}</em></p></blockquote>
+    <p class="lead">Advice from Agro-Genie:</p>
+    <ul class="list-group">
+    {% for message in messages_advice %}
+
+      <li class="list-group-item">{{ message }}</li>
+    {% endfor %}
+    </ul>
+    <p class="lead">Some Points from Agro-Genie:</p>
+    {% for point in points_advice %}
+
+      <li class="list-group-item">{{ point }}</li>
+    {% endfor %}
+
 {% else %}
 <h1>{{form_type}}</h1>
 {% endif %}

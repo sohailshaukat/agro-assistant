@@ -3,7 +3,7 @@ from flask_wtf import FlaskForm
 from wtforms import (StringField, BooleanField, DateTimeField, RadioField, SelectField,
                     TextField, TextAreaField, SubmitField)
 from wtforms.validators import DataRequired
-from soils import soils
+from soils import soils,advice
 
 app = Flask(__name__)
 
@@ -22,8 +22,7 @@ class GenieCropForm(FlaskForm):
     crop_option = SelectField(u'Select a Crop kind:', choices =[('crop_option_null','Null'),('crop_option_rice','Rice'),('crop_option_wheat','Wheat'),
                                                                 ('crop_option_sugarcane','Sugarcane'),('crop_option_groundnut','Groundnut'),
                                                                 ('crop_option_apple','Apple'),('crop_option_strawberry','Strawberry'),
-                                                                ('crop_option_maize','Maize'),('crop_option_grapes','Grapes'),('crop_option_coffee','Coffee'),
-                                                                ('crop_option_pulses','Pulses')])
+                                                                ('crop_option_maize','Maize'),('crop_option_grapes','Grapes'),('crop_option_coffee','Coffee')])
     submit = SubmitField('Submit')
 
 class GenieFertilizerForm(FlaskForm):
@@ -35,10 +34,9 @@ class GenieFertilizerForm(FlaskForm):
     crop_option = SelectField(u'Select a Crop kind:', choices =[('crop_option_null','Null'),('crop_option_rice','Rice'),('crop_option_wheat','Wheat'),
                                                                 ('crop_option_sugarcane','Sugarcane'),('crop_option_groundnut','Groundnut'),
                                                                 ('crop_option_apple','Apple'),('crop_option_strawberry','Strawberry'),
-                                                                ('crop_option_maize','Maize'),('crop_option_grapes','Grapes'),('crop_option_coffee','Coffee')
-                                                                ])
+                                                                ('crop_option_maize','Maize'),('crop_option_grapes','Grapes'),('crop_option_coffee','Coffee')])
 
-    submit = SubmitField('Submit')
+    submit = SubmitField('Request')
 
 
 
@@ -123,7 +121,12 @@ def soil_genie():
     form_crop = GenieCropForm()
     form_fertilizer = GenieFertilizerForm()
     session['formtype'] = False
-    if form_soil.validate_on_submit():
+    if form_fertilizer.validate_on_submit():
+        session['soil_type'] = form_fertilizer.soil_type.data
+        session['crop_option'] = form_fertilizer.crop_option.data
+        session['formtype'] = 'fertilizer_genie'
+        return redirect(url_for('soil_genie_result'))
+    elif form_soil.validate_on_submit():
         session['soil_type'] = form_soil.soil_type.data
         session['formtype'] = 'soil_genie'
         return redirect(url_for('soil_genie_result'))
@@ -131,12 +134,6 @@ def soil_genie():
         session['crop_option'] = form_crop.crop_option.data
         session['formtype'] = 'crop_genie'
         return redirect(url_for('soil_genie_result'))
-    elif form_fertilizer.validate_on_submit():
-        session['soil_type'] = form_fertilizer.soil_type.data
-        session['crop_option'] = form_fertilizer.crop_option.data
-        session['formtype'] = 'fertilizer_genie'
-        return redirect(url_for('soil_genie_result'))
-
 
 
     return render_template('soil-genie.html',form_soil = form_soil, form_crop = form_crop, form_fertilizer = form_fertilizer)
@@ -147,6 +144,9 @@ def soil_genie_result():
     crop_list = False
     soil_list = False
     crop_option_result = False
+    messages_advice = False
+    points_advice = False
+    compatibility_sting = False
     form_type = 'NoForm'
 
     if not session['formtype']:
@@ -164,10 +164,15 @@ def soil_genie_result():
         form_type = 'crop_genie'
         pass
     elif session['formtype'] == 'fertilizer_genie':
-        data_publish_fertilizer = soils.soil_crop_fertilizer(session['soil_type'], session['crop_option'])
+        data_publish_fertilizer = advice.advice(session['soil_type'], session['crop_option'])
+        messages_advice = data_publish_fertilizer['advice_messages']
+        points_advice = data_publish_fertilizer['advice_points']
+        soil_type_result = data_publish_fertilizer['soil_type']
+        crop_option_result = data_publish_fertilizer['crop_option']
+        compatibility_string = data_publish_fertilizer['compatibility']
         form_type = 'fertilizer_genie'
         pass
-    return render_template('soil-genie-advice.html',form_type = form_type,soil_type_result= soil_type_result, crop_list= crop_list, crop_option_result = crop_option_result , soil_list =soil_list  )
+    return render_template('soil-genie-advice.html',form_type = form_type,soil_type_result= soil_type_result, crop_list= crop_list, crop_option_result = crop_option_result , soil_list =soil_list , messages_advice = messages_advice , points_advice = points_advice, compatibility_string = compatibility_string )
 
 @app.errorhandler(404)
 def page_not_found(e):

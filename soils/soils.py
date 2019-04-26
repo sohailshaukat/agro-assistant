@@ -107,6 +107,20 @@ def crop_name_converter(crop_option_list):
     if crop_option_list == 'crop_option_coffee':
         return 'Coffee'
 
+def soil_name_converter(soil_type_code):
+    if soil_type_code == 'soil_type_alluvial':
+        return 'Alluvial Soil'
+    if soil_type_code == 'soil_type_red':
+        return 'Red Soil'
+    if soil_type_code == 'soil_type_black':
+        return 'Black Soil'
+    if soil_type_code == 'soil_type_mountain':
+        return 'Mountain Soil'
+    if soil_type_code == 'soil_type_laterite':
+        return 'Laterite Soil'
+    if soil_type_code == 'soil_type_desert':
+        return 'Desert Soil'
+
 def crop_to_soil(crop_option_list):
 
     data_alluvial = alluvial_soil_data()
