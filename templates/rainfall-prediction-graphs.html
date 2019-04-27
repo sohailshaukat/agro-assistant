@@ -1,0 +1,86 @@
+{% extends 'basic.html' %}
+{% block content %}
+<div class="jumbotron">
+  <h1 class="display-3">Statistics and Models:</h1>
+  <p class="lead">Below displayed are all the graphs and models used for prediction.</p>
+</div>
+
+<div class="container ">
+
+
+<h1 class= "display-4">Statistics: </h1>
+<div style="margin : auto;opacity: 0.9; border-radius:5px; padding:5px;">
+  <img src="{{ url_for('static', filename='months_vs_rainfall.png')}}" alt="Months vs Rainfall">
+
+</div>
+
+<div style="margin : auto; border-radius:5px; padding:5px; opacity: 0.9;">
+  <img src="{{ url_for('static', filename='june_vs_rainfall.png')}}" alt="June VS Rainfall">
+
+</div>
+
+<div style="margin : auto; opacity: 0.9; border-radius:5px; padding:5px;">
+  <img src="{{ url_for('static', filename='july_vs_rainfall.png')}}" alt="July vs Rainfall">
+
+</div>
+
+<div style="margin : auto;opacity: 0.9; border-radius:5px; padding:5px;">
+  <img src="{{ url_for('static', filename='august_vs_rainfall.png')}}" alt="August vs Rainfall">
+
+</div>
+
+<div style="margin : auto;opacity: 0.9; border-radius:5px; padding:5px;">
+  <img src="{{ url_for('static', filename='september_vs_rainfall.png')}}" alt="September vs Rainfall">
+
+</div>
+
+<div style="margin : auto;opacity: 0.9; border-radius:5px; padding:5px;">
+  <img src="{{ url_for('static', filename='october_vs_rainfall.png')}}" alt="October vs Rainfall">
+
+</div>
+
+<h1 class= "display-4">Linear Model: </h1>
+<div style="margin : auto;opacity: 0.9; border-radius:5px; padding:5px;">
+  <img src="{{ url_for('static', filename='june_linear_model.png')}}" alt="June Linear Model">
+
+</div>
+<div style="margin : auto;opacity: 0.9; border-radius:5px; padding:5px;">
+  <img src="{{ url_for('static', filename='july_linear_model.png')}}" alt="July Linear Model">
+
+</div>
+<div style="margin : auto;opacity: 0.9; border-radius:5px; padding:5px;">
+  <img src="{{ url_for('static', filename='august_linear_model.png')}}" alt="August Linear Model">
+
+</div>
+<div style="margin : auto;opacity: 0.9; border-radius:5px; padding:5px;">
+  <img src="{{ url_for('static', filename='september_linear_model.png')}}" alt="September Linear Model">
+
+</div>
+<div style="margin : auto;opacity: 0.9; border-radius:5px; padding:5px;">
+  <img src="{{ url_for('static', filename='october_linear_model.png')}}" alt="October Linear Model">
+
+<h1 class= "display-4">Polynomial Model: </h1>
+</div>
+<div style="margin : auto;opacity: 0.9; border-radius:5px; padding:5px;">
+  <img src="{{ url_for('static', filename='june_polynomial_model.png')}}" alt="June Polynomial Model">
+
+</div>
+<div style="margin : auto;opacity: 0.9; border-radius:5px; padding:5px;">
+  <img src="{{ url_for('static', filename='july_polynomial_model.png')}}" alt="July Polynomial Model">
+
+</div>
+<div style="margin : auto;opacity: 0.9; border-radius:5px; padding:5px;">
+  <img src="{{ url_for('static', filename='august_polynomial_model.png')}}" alt="August Polynomial Model">
+
+</div>
+<div style="margin : auto;opacity: 0.9; border-radius:5px; padding:5px;">
+  <img src="{{ url_for('static', filename='september_polynomial_model.png')}}" alt="September Polynomial Model">
+
+</div>
+<div style="margin : auto;opacity: 0.9; border-radius:5px; padding:5px;">
+  <img src="{{ url_for('static', filename='october_polynomial_model.png')}}" alt="October Polynomial Model">
+
+</div>
+
+</div>
+{% endblock %}

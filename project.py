@@ -53,6 +53,10 @@ def about():
 def sensor_data():
     return render_template('sensor_data.html')
 
+@app.route('/rainfall-prediction/graphs')
+def rainfall_prediction_graph():
+    return render_template('rainfall-prediction-graphs.html')
+
 @app.route('/rainfall-prediction')
 def rainfall_prediction():
     rainfall_data_tuple = rainfall_regressor.rain_predictor()
@@ -189,6 +193,9 @@ def soil_genie_result():
         form_type = 'fertilizer_genie'
         pass
     return render_template('soil-genie-advice.html',form_type = form_type,soil_type_result= soil_type_result, crop_list= crop_list, crop_option_result = crop_option_result , soil_list =soil_list , messages_advice = messages_advice , points_advice = points_advice, compatibility_string = compatibility_string )
+
+
+
 
 @app.errorhandler(404)
 def page_not_found(e):
