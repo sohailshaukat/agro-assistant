@@ -132,6 +132,8 @@ def desert_soil():
 
 @app.route('/agro-genie',methods=['GET','POST'])
 def soil_genie():
+    form_soil = GenieSoilForm()
+    form_crop = GenieCropForm()
     form_fertilizer = GenieFertilizerForm()
     session['formtype'] = False
     if form_fertilizer.validate_on_submit():
@@ -139,14 +141,6 @@ def soil_genie():
         session['crop_option'] = form_fertilizer.crop_option.data
         session['formtype'] = 'fertilizer_genie'
         return redirect(url_for('soil_genie_result'))
-
-
-    return render_template('soil-genie.html', form_fertilizer = form_fertilizer)
-
-@app.route('/soil-crop-classifier',methods=['GET','POST'])
-def soil_crop_classifier():
-    form_soil = GenieSoilForm()
-    form_crop = GenieCropForm()
     if form_soil.validate_on_submit():
         session['soil_type'] = form_soil.soil_type.data
         session['formtype'] = 'soil_genie'
@@ -155,7 +149,10 @@ def soil_crop_classifier():
         session['crop_option'] = form_crop.crop_option.data
         session['formtype'] = 'crop_genie'
         return redirect(url_for('soil_genie_result'))
-    return render_template('soil-crop-classifier.html', form_soil = form_soil , form_crop = form_crop)
+
+
+    return render_template('soil-genie.html', form_soil = form_soil , form_crop = form_crop,form_fertilizer = form_fertilizer)
+
 
 @app.route('/agro-genie/advice')
 def soil_genie_result():
