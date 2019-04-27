@@ -49,9 +49,9 @@ def index():
 def about():
     return render_template("about.html")
 
-@app.route('/sensor_data')
-def sensor_data():
-    return render_template('sensor_data.html')
+@app.route('/irrigation-flow')
+def irrigation_flow():
+    return render_template('irrigation-flow.html')
 
 @app.route('/rainfall-prediction/graphs')
 def rainfall_prediction_graph():
